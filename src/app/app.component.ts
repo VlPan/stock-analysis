@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'stock-analysis';
+
+  links = ['analysis-config'];
+  activeLink = this.links[0];
 }

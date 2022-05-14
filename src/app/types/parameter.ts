@@ -7,11 +7,9 @@ export interface Parameter {
 	name: string;
 	type: ParameterType;
 	
-	analysisId: string;
-
 	min: number;
 	max: number;
-	wight: number;
+	weight: number;
 
 	color?: string;
 }

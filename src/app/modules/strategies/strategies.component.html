@@ -1,15 +1,25 @@
-
-
 <div class="strategies">
 	<mat-card class="add-strategy">
-		<button mat-button color="primary" (click)="onAddStrategy()">Add Strategy</button>
+		<button mat-button
+						color="primary"
+						(click)="onAddStrategy()">Add Strategy</button>
 	</mat-card>
-	<mat-card *ngFor="let s of strategies">
+	<mat-card *ngFor="let s of strategies" [routerLink]="s.id">
 		<mat-card-title>{{s.name}}</mat-card-title>
-		<mat-card-subtitle>
-			<button mat-icon-button color="warn" aria-label="Edit" (click)="onDeleteStrategy(s)">
+		<div class="actions">
+			<button mat-icon-button
+							color="primary"
+							aria-label="Editor"
+							>
+				<mat-icon>edit</mat-icon>
+			</button>
+
+			<button mat-icon-button
+							color="warn"
+							aria-label="Delete"
+							(click)="onDeleteStrategy(s, $event)">
 				<mat-icon>delete</mat-icon>
-      </button>
-		</mat-card-subtitle>
+			</button>
+		</div>
 	</mat-card>
 </div>

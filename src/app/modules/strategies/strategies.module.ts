@@ -11,7 +11,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     MatModule,
     ReactiveFormsModule,
-    RouterModule.forChild([{ path: '', component: StrategiesComponent }]),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: StrategiesComponent,
+      },
+    ]),
   ],
   declarations: [StrategiesComponent, StrategyDialogComponent],
 })

@@ -1,11 +1,11 @@
 import { LS_KEYS } from './../../types/ls-keys';
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/ls';
-import { StrategiesService } from './strategies.service';
 import { Strategy } from 'src/app/types/strategy';
 import { MatDialog } from '@angular/material/dialog';
 import { StrategyDialogComponent } from 'src/app/components/dialogs/strategy/strategy-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm/confirm-dialog.component';
+import { StrategiesService } from 'src/app/services/strategies.service';
 
 @Component({
   selector: 'app-strategies',
@@ -27,11 +27,14 @@ export class StrategiesComponent implements OnInit {
     let dialogRef = this.dialog.open(StrategyDialogComponent);
 
     dialogRef.afterClosed().subscribe((strategy: Strategy) => {
-      this.ss.add(strategy);
+      if (strategy) {
+        this.ss.add(strategy);
+      }
     });
   }
 
-  onDeleteStrategy(strategy: Strategy) {
+  onDeleteStrategy(strategy: Strategy, $event) {
+		$event.stopPropagation();
     let dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Delete Strategy',

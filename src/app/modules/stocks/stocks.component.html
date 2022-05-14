@@ -81,9 +81,9 @@
 	<!-- Points Column -->
 	<ng-container matColumnDef="lastCalculatedResult">
 		<th mat-header-cell
-				mat-sort-header
+				mat-sort-header="lastCalculatedResult"
 				*matHeaderCellDef
-				mat-sort-header> points </th>
+				> points </th>
 		<td mat-cell
 				*matCellDef="let element"> {{element.lastCalculatedResult[selectedStrategyId]}} </td>
 	</ng-container>
@@ -93,7 +93,7 @@
 			<th mat-header-cell
 					mat-sort-header
 					*matHeaderCellDef
-					mat-sort-header> allocation </th>
+					> allocation </th>
 			<td mat-cell
 					*matCellDef="let element"> {{allocation[element.id] ? allocation[element.id] + ' $' : ''}} </td>
 		</ng-container>

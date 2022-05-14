@@ -50,6 +50,12 @@ export class StocksComponent implements OnInit {
 
   ngAfterViewInit() {
     console.log('this.sort', this.sort);
+		this.dataSource.sortingDataAccessor = (item, property) => {
+			switch(property) {
+				case 'lastCalculatedResult': return item.lastCalculatedResult[this.selectedStrategyId]
+				default: return item[property];
+			}
+		};
     this.dataSource.sort = this.sort;
   }
 

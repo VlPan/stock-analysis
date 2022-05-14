@@ -146,7 +146,7 @@ export class StocksComponent implements OnInit {
     let dialogRef = this.dialog.open(EditStockDialogComponent, {
       data: {
         stock: row,
-        strategyId: '6e558027-f665-490b-861b-0acf0b96a3b0',
+        strategyId: this.selectedStrategyId,
       },
     });
     dialogRef.afterClosed().subscribe((isUserAgree: boolean) => {

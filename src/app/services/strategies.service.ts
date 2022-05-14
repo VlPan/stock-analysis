@@ -20,6 +20,14 @@ export class StrategiesService {
 		this.emit();
   }
 
+	setDefaultStrategy(id: string) {
+		this.ls.set(LS_KEYS.DEFAULT_STRATEGY, id);
+	}
+
+	getDefaultStrategyId() {
+		return this.ls.get(LS_KEYS.DEFAULT_STRATEGY);
+	}
+
   add(s: Strategy) {
     const strategies = this.get();
     strategies.unshift(s);

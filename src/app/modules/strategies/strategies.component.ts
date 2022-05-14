@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { StrategyDialogComponent } from 'src/app/components/dialogs/strategy/strategy-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm/confirm-dialog.component';
 import { StrategiesService } from 'src/app/services/strategies.service';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-strategies',
@@ -14,6 +15,7 @@ import { StrategiesService } from 'src/app/services/strategies.service';
 })
 export class StrategiesComponent implements OnInit {
   public strategies: Strategy[];
+	public defaultStrategy;
 
   constructor(private ss: StrategiesService, private dialog: MatDialog) {}
 
@@ -21,6 +23,8 @@ export class StrategiesComponent implements OnInit {
     this.ss.strategies$.subscribe((value) => {
       this.strategies = value;
     });
+
+		this.defaultStrategy = this.ss.getDefaultStrategyId();
   }
 
   onAddStrategy() {
@@ -47,4 +51,11 @@ export class StrategiesComponent implements OnInit {
       }
     });
   }
+
+	makeDefault($event: MatCheckboxChange, strategy: Strategy) {
+		if($event.checked) {
+			this.defaultStrategy = strategy.id;
+			this.ss.setDefaultStrategy(strategy.id)
+		}
+	}
 }

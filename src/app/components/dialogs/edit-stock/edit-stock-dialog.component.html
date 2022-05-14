@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Edit Stock</h1>
+<div mat-dialog-content>
+	<form [formGroup]="stockForm" class="stock-form">
+		<mat-form-field appearance="fill" >
+			<mat-label>Stock name</mat-label>
+			<input  matInput formControlName="name">
+		</mat-form-field>
+
+		<mat-form-field appearance="fill" >
+			<mat-label>Stock Long name</mat-label>
+			<input  matInput formControlName="longName">
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Strategy</mat-label>
+			<mat-select  formControlName="strategy">
+				<mat-option *ngFor="let s of strategies" [value]="s.id">
+					{{s.name}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</form>
+
+	<div class="analysis-container">
+		<div class="analysis" *ngFor="let ana of analysis">
+			{{ana.name}}
+			<div class="parameter" *ngFor="let param of ana.parameters">
+				<mat-form-field appearance="fill" >
+					<mat-label>{{param.name}}</mat-label>
+					<input type="number" matInput [(ngModel)]="analysisInputs[selectedStrategy.id][ana.id][param.id]" [min]="param.min" [max]="param.max">
+				</mat-form-field>
+			</div>
+		</div>
+	</div>
+
+	
+</div>
+<div mat-dialog-actions>
+	<button mat-button color="primary" [disabled]="stockForm.invalid" (click)="onSave()">Save</button>
+</div>

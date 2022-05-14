@@ -4,7 +4,7 @@ export interface Stock {
   longName: string;
 	color?: string;
 
-  lastCalculatedResult: number;
+  lastCalculatedResult: {[strategyId: string]: number};
   analysisInputs: AnalysisInputs;
 }
 

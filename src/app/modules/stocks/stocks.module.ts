@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { StocksComponent } from './stocks.component';
 import { RouterModule } from '@angular/router';
 import { AddStockDialogComponent } from 'src/app/components/dialogs/add-stock/add-stock-dialog.component';
+import { EditStockDialogComponent } from 'src/app/components/dialogs/edit-stock/edit-stock-dialog.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { AddStockDialogComponent } from 'src/app/components/dialogs/add-stock/ad
 		ReactiveFormsModule,
 		FormsModule
   ],
-  declarations: [StocksComponent, AddStockDialogComponent],
+  declarations: [StocksComponent, AddStockDialogComponent, EditStockDialogComponent],
 })
 export class StocksModule {}

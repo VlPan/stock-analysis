@@ -5,5 +5,7 @@ export const LS_KEYS = {
 	STRATEGIES: makeKey('strategies'),
 	ANALYSIS: makeKey('analysis'),
 	SECURITIES: makeKey('securities'),
-	PARAMETERS: makeKey('parameters')
+	PARAMETERS: makeKey('parameters'),
+	INCLUDED_IN_ANALYSIS: makeKey('securities_included_in_analysis'),
+	DEFAULT_STRATEGY: makeKey('default_strategy')
 }

@@ -3,7 +3,7 @@ import { AnalysisService } from 'src/app/services/analysis.service';
 import { StrategiesService } from './../../../services/strategies.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { AnalysisInputs, Stock } from 'src/app/types/stock';
 import { v4 as uuidv4 } from 'uuid';
 import { Strategy } from 'src/app/types/strategy';
@@ -26,7 +26,6 @@ export class AddStockDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddStockDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Partial<any>,
 
 		private strategiesService: StrategiesService,
 		private analysisService: AnalysisService,
@@ -67,9 +66,8 @@ export class AddStockDialogComponent implements OnInit {
 
 	onSave() {
 
-		const lastCalculatedResult = this.stocksService.calculateResult(this.selectedStrategy.id, this.analysisInputs, this.analysis);
-
-		console.log('%c ---> lastCalculatedResult ', 'color: #de4209', lastCalculatedResult);
+		const result = this.stocksService.calculateResult(this.selectedStrategy.id, this.analysisInputs, this.analysis);
+		const lastCalculatedResult = {[this.selectedStrategy.id]: result};
 
 		const stock: Stock = {
 			id: uuidv4(),
@@ -80,9 +78,6 @@ export class AddStockDialogComponent implements OnInit {
 			analysisInputs: this.analysisInputs
 		}
 
-		console.log('stock', stock );
-
-		// this.stocksService.calculateResult();
-
+		this.dialogRef.close(stock)
 	}
 }

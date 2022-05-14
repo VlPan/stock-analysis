@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm/confirm-dialog.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -22,7 +25,9 @@ import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm/confi
     MatDialogModule,
     MatFormFieldModule,
 		MatInputModule,
-		MatIconModule
+		MatIconModule,
+		MatCheckboxModule,
+		MatSortModule
   ],
 	declarations: [ConfirmDialogComponent],
   exports: [
@@ -35,7 +40,10 @@ import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm/confi
 		MatInputModule,
 		MatIconModule,
 		MatSelectModule,
-		ConfirmDialogComponent
+		ConfirmDialogComponent,
+		MatCheckboxModule,
+		MatTableModule,
+		MatSortModule
   ],
 })
 export class MatModule {}

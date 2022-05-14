@@ -4,13 +4,19 @@
 						color="primary"
 						(click)="onAddStrategy()">Add Strategy</button>
 	</mat-card>
-	<mat-card *ngFor="let s of strategies" [routerLink]="s.id">
+	<mat-card *ngFor="let s of strategies"
+						[routerLink]="s.id">
 		<mat-card-title>{{s.name}}</mat-card-title>
 		<div class="actions">
+
+			<mat-checkbox [checked]="s.id === defaultStrategy"
+										[disabled]="s.id === defaultStrategy"
+										(click)="$event.stopPropagation()"
+										(change)="makeDefault($event, s)">Make Default</mat-checkbox>
+
 			<button mat-icon-button
 							color="primary"
-							aria-label="Editor"
-							>
+							aria-label="Editor">
 				<mat-icon>edit</mat-icon>
 			</button>
 

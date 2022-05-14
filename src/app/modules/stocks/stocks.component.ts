@@ -151,7 +151,7 @@ export class StocksComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((isUserAgree: boolean) => {
       if (isUserAgree) {
-        this.stocksService.delete(row);
+        this.stocksService.update(row);
       }
     });
   }

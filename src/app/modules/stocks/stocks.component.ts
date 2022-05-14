@@ -12,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { EditStockDialogComponent } from 'src/app/components/dialogs/edit-stock/edit-stock-dialog.component';
 import { Strategy } from 'src/app/types/strategy';
 import { StrategiesService } from 'src/app/services/strategies.service';
+import { BalanceService } from 'src/app/services/balance.service';
 
 @Component({
   selector: 'app-stocks',
@@ -21,14 +22,18 @@ import { StrategiesService } from 'src/app/services/strategies.service';
 export class StocksComponent implements OnInit {
   public stocks: Stock[] = [];
   public dataSource: MatTableDataSource<Stock>;
-	public selectedStrategyId: string;
-	public strategies: Strategy[];
+  public selectedStrategyId: string;
+  public strategies: Strategy[];
+  public balance: number = 0;
+	public allocation: Record<string, any> = {};
+
   selection = new SelectionModel<string>(true, []);
   displayedColumns: string[] = [
     'select',
     'name',
     'longName',
     'lastCalculatedResult',
+		'allocation',
     'edit',
     'delete',
   ];
@@ -40,16 +45,18 @@ export class StocksComponent implements OnInit {
     private stocksService: StocksService,
     private includedService: SecuritiesIncludedInAnalysis,
     private strategiesService: StrategiesService,
+    private balanceService: BalanceService
   ) {}
 
-	ngAfterViewInit() {
-		console.log('this.sort', this.sort);
+  ngAfterViewInit() {
+    console.log('this.sort', this.sort);
     this.dataSource.sort = this.sort;
   }
 
   ngOnInit() {
-		this.selectedStrategyId = this.strategiesService.getDefaultStrategyId();
-		this.strategies = this.strategiesService.strategies$.value;
+    this.balance = this.balanceService.get();
+    this.selectedStrategyId = this.strategiesService.getDefaultStrategyId();
+    this.strategies = this.strategiesService.strategies$.value;
     this.stocksService.stocks$.subscribe((stocks) => {
       this.stocks = stocks;
       this.dataSource = new MatTableDataSource<Stock>(this.stocks);
@@ -58,6 +65,14 @@ export class StocksComponent implements OnInit {
     this.includedService.included$.value.forEach((id) => {
       this.selection.select(id);
     });
+
+		this.allocateBalance();
+  }
+
+  public updateBalance(event: Event) {
+    console.log('updateBalance', event);
+    this.balanceService.set((event.target as HTMLInputElement).value);
+		this.balance = +(event.target as HTMLInputElement).value;
   }
 
   addStock() {
@@ -68,6 +83,28 @@ export class StocksComponent implements OnInit {
         this.stocksService.add(stock);
       }
     });
+  }
+
+  allocateBalance() {
+    const allocation = {};
+    const includedInCalculation = this.includedService.included$.value.map(
+      (id) => this.stocks.find((s) => s.id === id)
+    );
+    const sum = includedInCalculation.reduce((acc, cur) => {
+      return acc + cur.lastCalculatedResult[this.selectedStrategyId];
+    }, 0);
+
+		console.log('sum', sum);
+    for (const stock of includedInCalculation) {
+      allocation[stock.id] = parseFloat(
+        (
+					(this.balance / sum) * stock.lastCalculatedResult[this.selectedStrategyId]
+
+        ).toString()
+      ).toFixed(2);
+    }
+
+		this.allocation = allocation;
   }
 
   applyFilter(event: Event) {
@@ -102,6 +139,7 @@ export class StocksComponent implements OnInit {
     dialogRef.afterClosed().subscribe((isUserAgree: boolean) => {
       if (isUserAgree) {
         this.stocksService.delete(row);
+				this.includedService.delete(row.id);
       }
     });
   }

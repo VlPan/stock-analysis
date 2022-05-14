@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'stock-analysis';
 
-  links = ['analysis-config'];
+  links = ['stocks', 'strategies'];
   activeLink = this.links[0];
 }

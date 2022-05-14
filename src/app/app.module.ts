@@ -15,7 +15,7 @@ import { MatModule } from './modules/mat-module/mat-module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-	MatModule
+		MatModule
   ],
   providers: [],
   bootstrap: [AppComponent]

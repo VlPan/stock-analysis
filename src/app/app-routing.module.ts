@@ -5,13 +5,16 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'analysis-config',
+		redirectTo: 'stocks',
 		pathMatch: 'full'
 	},
   {
-    path: 'analysis-config',
-	loadChildren: () => import('./modules/analysis-config/analysis-config.module').then(m => m.AnalysisConfigModule),
-	// pathMatch: 'full'
+    path: 'strategies',
+	loadChildren: () => import('./modules/strategies/strategies.module').then(m => m.StrategiesModule),
+  },
+  {
+    path: 'stocks',
+	loadChildren: () => import('./modules/stocks/stocks.module').then(m => m.StocksModule),
   },
 ];
 

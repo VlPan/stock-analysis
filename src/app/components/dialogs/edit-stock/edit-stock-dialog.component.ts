@@ -54,26 +54,29 @@ export class EditStockDialogComponent implements OnInit {
     console.log('fillAnalysisInputs');
     const existingData = this.data.stock.analysisInputs;
 
+    console.log('existingData', existingData);
     for (const ana of this.analysis) {
       if (existingData[this.selectedStrategy.id]) {
-        this.analysisInputs[this.selectedStrategy.id] = {};
+        if (!this.analysisInputs[this.selectedStrategy.id]) {
+          this.analysisInputs[this.selectedStrategy.id] = {};
+        }
 
         if (existingData[this.selectedStrategy.id][ana.id]) {
           this.analysisInputs[this.selectedStrategy.id][ana.id] = {};
 
           for (const param of ana.parameters) {
-            if (existingData[this.selectedStrategy.id][ana.id][param.id]) {
-              const existingValue =
-                existingData[this.selectedStrategy.id][ana.id][param.id];
-              this.analysisInputs[this.selectedStrategy.id][ana.id][param.id] =
-                existingValue;
-            }
+            // if (existingData[this.selectedStrategy.id][ana.id][param.id]) {
+            const existingValue =
+              existingData[this.selectedStrategy.id][ana.id][param.id];
+            this.analysisInputs[this.selectedStrategy.id][ana.id][param.id] =
+              existingValue;
+            // }
           }
         }
       }
     }
 
-		console.log('this.analysisInputs', this.analysisInputs);
+    console.log('this.analysisInputs', this.analysisInputs);
   }
 
   determineStrategy(id: string) {

@@ -62,6 +62,9 @@ export class AddStockDialogComponent implements OnInit {
 				this.analysisInputs[this.selectedStrategy.id][ana.id][param.id] = null;
 			}
 		}
+
+		console.log('add FIll inputs', this.analysisInputs);
+
 	}
 
 	onSave() {
@@ -69,6 +72,7 @@ export class AddStockDialogComponent implements OnInit {
 		const result = this.stocksService.calculateResult(this.selectedStrategy.id, this.analysisInputs, this.analysis);
 		const lastCalculatedResult = {[this.selectedStrategy.id]: result};
 
+		console.log('save ', this.analysisInputs);
 		const stock: Stock = {
 			id: uuidv4(),
 			name: this.stockForm.get('name').value,

@@ -70,7 +70,6 @@ export class StocksComponent implements OnInit {
   }
 
   public updateBalance(event: Event) {
-    console.log('updateBalance', event);
     this.balanceService.set((event.target as HTMLInputElement).value);
 		this.balance = +(event.target as HTMLInputElement).value;
   }
@@ -94,7 +93,6 @@ export class StocksComponent implements OnInit {
       return acc + cur.lastCalculatedResult[this.selectedStrategyId];
     }, 0);
 
-		console.log('sum', sum);
     for (const stock of includedInCalculation) {
       allocation[stock.id] = parseFloat(
         (

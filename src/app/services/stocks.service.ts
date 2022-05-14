@@ -56,31 +56,34 @@ export class StocksService {
     this.set(stocks);
   }
 
-  calculateResult(strategyId: string, analysisInput: AnalysisInputs, analysis: Analysis[]) {
-		let totalScore = 0;
+  calculateResult(
+    strategyId: string,
+    analysisInput: AnalysisInputs,
+    analysis: Analysis[]
+  ) {
+    let totalScore = 0;
     for (const ana of analysis) {
-
-			let anaResult = 0;
-			let maxResult = 0, currentResult = 0;
+      let anaResult = 0;
+      let maxResult = 0,
+        currentResult = 0;
 
       for (const param of ana.parameters) {
-				const value = analysisInput[strategyId][ana.id][param.id];
-				const max = param.max;
-				const weigh = param.weight;
+        const value = analysisInput[strategyId][ana.id][param.id];
+        const max = param.max;
+        const weigh = param.weight;
 
-				const maxValue = max * weigh;
-				const currentValue = value * weigh;
+        const maxValue = max * weigh;
+        const currentValue = value * weigh;
 
-				maxResult += maxValue;
-				currentResult += currentValue;
-
+        maxResult += maxValue;
+        currentResult += currentValue;
       }
-			
-			anaResult = (currentResult / maxResult) * 100 * ana.weight;
-			totalScore += anaResult;
+
+      anaResult = (currentResult / maxResult) * 100 * ana.weight;
+      totalScore += anaResult;
     }
 
-		return totalScore;
+    return Number(parseFloat(totalScore.toString()).toFixed(2));
   }
 
   private get(): Stock[] {

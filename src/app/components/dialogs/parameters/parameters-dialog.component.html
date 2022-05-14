@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Add Analysis</h1>
+<div mat-dialog-content>
+	<form [formGroup]="paramsForm" class="parameters-form">
+		<mat-form-field appearance="fill" >
+			<mat-label>Analysis Name</mat-label>
+			<input  matInput formControlName="name">
+		</mat-form-field>
+
+		<mat-form-field appearance="fill" >
+			<mat-label>Analysis Weight</mat-label>
+			<input  matInput formControlName="weight" type="number">
+		</mat-form-field>
+
+		<mat-form-field appearance="fill" >
+			<mat-label>Min</mat-label>
+			<input  matInput formControlName="min" type="number">
+		</mat-form-field>
+
+		<mat-form-field appearance="fill" >
+			<mat-label>Max</mat-label>
+			<input  matInput formControlName="max" type="number">
+		</mat-form-field>
+	</form>
+</div>
+<div mat-dialog-actions>
+	<button mat-button color="primary" [disabled]="paramsForm.invalid" (click)="onSave()">Save</button>
+</div>

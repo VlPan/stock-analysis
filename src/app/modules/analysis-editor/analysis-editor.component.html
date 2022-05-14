@@ -1,0 +1,25 @@
+<div class="editor"
+		 *ngIf="analysis">
+	<h3>Selected Analysis: <span class="selected-analysis">{{analysis.name}}</span> (weight: {{analysis.weight}})</h3>
+
+	<button mat-button
+					color="primary"
+					(click)="addParameter()">Add Parameter</button>
+</div>
+
+<div class="params">
+	<mat-card *ngFor="let p of analysis.parameters">
+		<mat-card-title>{{p.name}}</mat-card-title>
+		<div>weight: {{p.weight }}</div>
+		<div>weight: {{p.min }}</div>
+		<div>weight: {{p.max }}</div>
+		<div class="actions">
+			<button mat-icon-button
+							color="warn"
+							aria-label="Delete"
+							(click)="deleteParameter(p.id, $event)">
+				<mat-icon>delete</mat-icon>
+			</button>
+		</div>
+	</mat-card>
+</div>

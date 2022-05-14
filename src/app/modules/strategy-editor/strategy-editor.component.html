@@ -1,0 +1,24 @@
+<div class="editor" *ngIf="strategy">
+	<h3>Selected Strategy: <span class="selected-strategy">{{strategy?.name}}</span></h3>
+	<div class="analyses">
+		<mat-card class="add-analysis">
+			<button mat-button
+							color="primary"
+							(click)="onAddAnalysis()">Add Analysis</button>
+		</mat-card>
+		<mat-card *ngFor="let a of analysis"
+							[routerLink]="createAnalysisEditorLink(a.id)">
+			<mat-card-title>{{a.name}}</mat-card-title>
+			<mat-card-subtitle>{{a.weight}}</mat-card-subtitle>
+			<div class="actions">
+
+				<button mat-icon-button
+								color="warn"
+								aria-label="Delete"
+								(click)="onDeleteAnalysis(a, $event)">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</div>
+		</mat-card>
+	</div>
+</div>

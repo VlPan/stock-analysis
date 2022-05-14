@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm/confirm-dialog.component';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ConfirmDialogComponent } from 'src/app/components/dialogs/confirm/confi
     MatFormFieldModule,
 		MatInputModule,
 		MatIconModule,
+		MatSelectModule,
 		ConfirmDialogComponent
   ],
 })
